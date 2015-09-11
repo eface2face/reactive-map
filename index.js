@@ -63,7 +63,7 @@ function ReactiveMap(map)
 		}	else {
 			var key = arguments[0]
 			var value = arguments[1]
-			this._map.get(key) !== item)
+			if (this._map.get(key) !== item)
 			{
 				this._map.set(key, item)
 				Object.observe(item, observer)
