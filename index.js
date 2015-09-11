@@ -56,15 +56,21 @@ function ReactiveMap(map)
 
 	// Entries
 
-	this.set = function(key, item) {
-		if(this._map.get(key) !== item)
-		{
-			this._map.set(key, item)
-			Object.observe(item, observer)
+	this.set = function() {
+		if (arguments.length === 1) {
+			var map = arguments[0]
+			setMap.call(this, map, observer)
+		}	else {
+			var key = arguments[0]
+			var value = arguments[1]
+			this._map.get(key) !== item)
+			{
+				this._map.set(key, item)
+				Object.observe(item, observer)
 
-			this._dep.changed()
+				this._dep.changed()
+			}
 		}
-	};
 
 	this.delete = function(key)
 	{
