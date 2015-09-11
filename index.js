@@ -20,7 +20,7 @@ function ReactiveMap(map)
 {
 	// called without `new`
 	if (!(this instanceof ReactiveMap))
-		return new ReactiveMap(map)
+		return new ReactiveMap(map);
 
 	this._map = (map instanceof Map) ? map : new Map(map)
 	this._dep = new Tracker.Dependency
@@ -49,7 +49,7 @@ function ReactiveMap(map)
 		{
 			Object.observe(item, observer)
 		})
-	}
+	};
 
 	this.clear = setMap.bind(this, [], observer)
 
@@ -63,7 +63,7 @@ function ReactiveMap(map)
 		}	else {
 			var key = arguments[0]
 			var value = arguments[1]
-			if (this._map.get(key) !== item)
+			this._map.get(key) !== item)
 			{
 				this._map.set(key, item)
 				Object.observe(item, observer)
@@ -71,7 +71,6 @@ function ReactiveMap(map)
 				this._dep.changed()
 			}
 		}
-	}
 
 	this.delete = function(key)
 	{
@@ -79,8 +78,8 @@ function ReactiveMap(map)
 		this._map.delete(key)
 
 		this._dep.changed()
-	}
-}
+	};
+};
 
 
 Object.defineProperty(ReactiveMap, 'length', {enumerable: true, value: 0})
@@ -90,7 +89,7 @@ Object.defineProperty(ReactiveMap.prototype, 'size',
 	enumerable: true,
 	get: function()
 	{
-		if (Tracker.active) this._dep.depend()
+		if (Tracker.active) this._dep.depend();
 
 		return this._map.size
 	}
@@ -117,10 +116,10 @@ var methodNames = ['forEach', 'get', 'has', 'keys']
 methodNames.forEach(function(methodName)
 {
 	ReactiveMap.prototype[methodName] = function() {
-		if (Tracker.active) this._dep.depend()
+		if (Tracker.active) this._dep.depend();
 
 		return this._map[methodName].apply(this._map, arguments)
-	}
+	};
 })
 
 
